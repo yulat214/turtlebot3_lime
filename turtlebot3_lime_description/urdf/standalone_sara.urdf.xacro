@@ -2,6 +2,9 @@
 <robot name="open_manipulator_sara" xmlns:xacro="http://ros.org/wiki/xacro">
 
   <xacro:include filename="$(find turtlebot3_lime_description)/urdf/open_manipulator_sara.urdf.xacro" />
+  
+  <xacro:include filename="$(find turtlebot3_lime_description)/gazebo/open_manipulator_sara.gazebo.xacro" />
+  <xacro:include filename="$(find turtlebot3_lime_description)/ros2_control/open_manipulator_sara.ros2_control.xacro" />
 
   <xacro:arg name="prefix" default="" />
   <xacro:arg name="use_sim" default="true" />
