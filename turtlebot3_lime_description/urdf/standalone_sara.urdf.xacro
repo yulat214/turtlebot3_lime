@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot name="open_manipulator_sara" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find turtlebot3_lime_description)/urdf/open_manipulator_sara.urdf.xacro" />
+
+  <xacro:arg name="prefix" default="" />
+  <xacro:arg name="use_sim" default="true" />
+
+  <link name="world"/>
+
+  <joint name="world_fixed" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="$(arg prefix)link1"/>
+  </joint>
+
+  <xacro:open_manipulator_sara prefix="$(arg prefix)" />
+  <xacro:open_manipulator_sara_gazebo prefix="$(arg prefix)" />
+  <xacro:open_manipulator_sara_ros2_control prefix="$(arg prefix)" use_sim="$(arg use_sim)" />
+
+  <gazebo>
+    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>$(find turtlebot3_lime_bringup)/config/hardware_controller_manager.yaml</parameters>
+    </plugin>
+  </gazebo>
+
+</robot>
