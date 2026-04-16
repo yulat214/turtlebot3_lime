@@ -12,7 +12,7 @@ https://github.com/ros-controls/ros2_control_demos/blob/foxy/ros2_control_demo_d
 
       <xacro:if value="$(arg use_sim)">
         <hardware>
-          <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+          <plugin>gz_ros2_control/GazeboSimSystem</plugin>
         </hardware>
       </xacro:if>
       <xacro:unless value="$(arg use_sim)">

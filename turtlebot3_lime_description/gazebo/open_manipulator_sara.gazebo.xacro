@@ -1,8 +1,4 @@
 <?xml version="1.0"?>
-<!--
-Copied and modified from turtlebot3 example:
-https://github.com/ROBOTIS-GIT/turtlebot3/blob/kinetic-devel/turtlebot3_description/urdf/turtlebot3_waffle_pi_for_open_manipulator.gazebo.xacro
--->
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
   <xacro:macro name="open_manipulator_sara_gazebo" params="prefix">
@@ -31,8 +27,7 @@ https://github.com/ROBOTIS-GIT/turtlebot3/blob/kinetic-devel/turtlebot3_descript
       <mu2>30.0</mu2>
       <maxVel>1.0</maxVel>
       <minDepth>0.001</minDepth>
-      <material>Gazebo/DarkGrey</material>
-    </gazebo>
+      </gazebo>
   </xacro:macro>
 
   <xacro:Link reference="${prefix}link1"/>
@@ -47,16 +42,18 @@ https://github.com/ROBOTIS-GIT/turtlebot3/blob/kinetic-devel/turtlebot3_descript
   <xacro:Link reference="${prefix}gripper_right_link"/>
 
   <gazebo reference="${prefix}end_effector_link">
-    <material>Gazebo/Red</material>
   </gazebo>
 
   <xacro:SimpleTransmission trans="${prefix}trans1" joint="${prefix}joint1" actuator="${prefix}actuator1" />
   <xacro:SimpleTransmission trans="${prefix}trans2" joint="${prefix}joint2" actuator="${prefix}actuator2" />
   <xacro:SimpleTransmission trans="${prefix}trans3" joint="${prefix}joint3" actuator="${prefix}actuator3" />
   <xacro:SimpleTransmission trans="${prefix}trans4" joint="${prefix}joint4" actuator="${prefix}actuator4" />
-  <xacro:SimpleTransmission trans="${prefix}trans5" joint="${prefix}gripper_left_joint" actuator="${prefix}actuator5" />
-  <xacro:SimpleTransmission trans="${prefix}trans6" joint="${prefix}gripper_right_joint" actuator="${prefix}actuator6" />
-
+  
+  <xacro:SimpleTransmission trans="${prefix}trans5" joint="${prefix}joint5" actuator="${prefix}actuator5" />
+  <xacro:SimpleTransmission trans="${prefix}trans6" joint="${prefix}joint6" actuator="${prefix}actuator6" />
+  
+  <xacro:SimpleTransmission trans="${prefix}trans7" joint="${prefix}gripper_left_joint" actuator="${prefix}actuator7" />
+  <xacro:SimpleTransmission trans="${prefix}trans8" joint="${prefix}gripper_right_joint" actuator="${prefix}actuator8" />
 
   </xacro:macro>
 
