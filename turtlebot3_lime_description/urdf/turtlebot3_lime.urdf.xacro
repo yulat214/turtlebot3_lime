@@ -4,6 +4,7 @@
   xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:arg name="prefix" default="" />
   <xacro:arg name="use_sim" default="false" />
+  <xacro:arg name="gz_cm_yaml_path" default="$(find turtlebot3_lime_bringup)/config/gazebo_controller_manager.yaml" />
 
   <xacro:arg name="use_fake_hardware" default="false" />
   <xacro:arg name="fake_sensor_commands" default="false" />
@@ -42,8 +43,8 @@
   <xacro:turtlebot3_lime_system name="TurtleBot3LimeSystem" prefix="$(arg prefix)" use_sim="$(arg use_sim)" use_fake_hardware="$(arg use_fake_hardware)" fake_sensor_commands="$(arg fake_sensor_commands)"/>
 
   <gazebo>
-    <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
-      <parameters>$(find turtlebot3_lime_bringup)/config/gazebo_controller_manager.yaml</parameters>
+    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>$(arg gz_cm_yaml_path)</parameters>
     </plugin>
   </gazebo>
 

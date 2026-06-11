@@ -95,9 +95,18 @@ def generate_launch_description():
     trajectory_execution = {
         "moveit_manage_controllers": True,
         "trajectory_execution.allowed_execution_duration_scaling": 1.2,
-        "trajectory_execution.allowed_goal_duration_margin": 0.5,
+        "trajectory_execution.allowed_goal_duration_margin": 2.0,
         "trajectory_execution.allowed_start_tolerance": 0.05,
     }
+
+    # Joint limits
+    joint_limits_yaml_path = os.path.join(
+        get_package_share_directory("turtlebot3_lime_moveit_config"),
+        "config",
+        "joint_limits.yaml",
+    )
+    with open(joint_limits_yaml_path, "r") as file:
+        joint_limits_yaml = yaml.safe_load(file)
 
     # Moveit Controllers
     moveit_simple_controllers_yaml_path = os.path.join(
@@ -144,6 +153,7 @@ def generate_launch_description():
             trajectory_execution,
             moveit_controllers,
             planning_scene_monitor_parameters,
+            {"robot_description_planning": joint_limits_yaml},
             {'use_sim_time': use_sim},
         ],
     )

@@ -12,6 +12,7 @@
   <author email="pyo@robotis.com">Pyo</author>
   <buildtool_depend>ament_cmake</buildtool_depend>
   <exec_depend>navigation2</exec_depend>
+  <exec_depend>opennav_docking</exec_depend>
   <exec_depend>rviz2</exec_depend>
   <export>
     <build_type>ament_cmake</build_type>

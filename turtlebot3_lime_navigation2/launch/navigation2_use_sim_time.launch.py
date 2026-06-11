@@ -33,10 +33,10 @@ def generate_launch_description():
     use_sim = LaunchConfiguration('use_sim')
     map_yaml_file = LaunchConfiguration('map_yaml_file')
     params_file = LaunchConfiguration('params_file')
-    default_bt_xml_filename = LaunchConfiguration('default_bt_xml_filename')
     autostart = LaunchConfiguration('autostart')
     use_composition = LaunchConfiguration('use_composition')
     use_respawn = LaunchConfiguration('use_respawn')
+    log_level = LaunchConfiguration('log_level')
 
     map_yaml_file = LaunchConfiguration(
         'map_yaml_file',
@@ -75,14 +75,6 @@ def generate_launch_description():
         ]
     )
 
-    default_bt_xml_filename = PathJoinSubstitution(
-        [
-            FindPackageShare('nav2_bt_navigator'),
-            'behavior_trees',
-            'navigate_w_replanning_and_recovery.xml'
-        ]
-    )
-
     return LaunchDescription([
         DeclareLaunchArgument(
             'start_rviz',
@@ -105,11 +97,6 @@ def generate_launch_description():
             description='Full path to the ROS2 parameters file to use for all launched nodes'),
 
         DeclareLaunchArgument(
-            'default_bt_xml_filename',
-            default_value=default_bt_xml_filename,
-            description='Full path to the behavior tree xml file to use'),
-
-        DeclareLaunchArgument(
             'autostart',
             default_value='true',
             description='Automatically startup the nav2 stack'),
@@ -125,16 +112,21 @@ def generate_launch_description():
             description='Whether to respawn if a node crashes. \
                 Applied when composition is disabled.'),
 
+        DeclareLaunchArgument(
+            'log_level',
+            default_value='WARN',
+            description='Log level for nav2 nodes (DEBUG/INFO/WARN/ERROR)'),
+
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([nav2_launch_file_dir, '/bringup_launch.py']),
             launch_arguments={
                 'map': map_yaml_file,
                 'use_sim_time': use_sim,
                 'params_file': params_file,
-                'default_bt_xml_filename': default_bt_xml_filename,
                 'autostart': autostart,
                 'use_composition': use_composition,
                 'use_respawn': use_respawn,
+                'log_level': log_level,
             }.items(),
         ),
 
@@ -143,6 +135,7 @@ def generate_launch_description():
             executable='rviz2',
             name='rviz2',
             arguments=['-d', rviz_config_file],
+            ros_arguments=['--log-level', 'WARN'],
             output='screen',
             condition=IfCondition(start_rviz)),
     ])

@@ -63,7 +63,7 @@ def generate_launch_description():
         [
             FindPackageShare('turtlebot3_lime_bringup'),
             'worlds',
-            'empty_world.model'
+            'empty_world.world'
         ]
     )
 

@@ -1,5 +1,32 @@
 # TurtleBot3 Lime
 
+## Future Work (Jazzy / Ignition Gazebo)
+
+### Gripper Grasping Simulation
+
+現在のグリッパーは `position_controllers/GripperActionController` + `gz_ros2_control/GazeboSimSystem` の position command interface（JointPositionReset）で動作しており、**視覚的な開閉は可能だが物体を掴む物理シミュレーションはできない**。
+
+JointPositionReset は物理エンジンを無視して関節位置をセットするため、グリッパー指が物体をすり抜ける。
+
+#### 推奨実装方針：`gz-sim-detachable-joint-system`
+
+接触検知時にグリッパーリンクと物体の間に固定ジョイントを動的生成するプラグイン。
+
+```xml
+<!-- SDF / world ファイルに追加 -->
+<plugin filename="gz-sim-detachable-joint-system" name="gz::sim::systems::DetachableJoint">
+  <parent_link>gripper_left_link</parent_link>
+  <child_model>target_object</child_model>
+  <child_link>link</child_link>
+  <detach_topic>/detach</detach_topic>
+</plugin>
+```
+
+- 実装タイミング：MoveIt・Navigation2・全機能の動作確認完了後
+- 参考：[gz-sim DetachableJoint](https://gazebosim.org/api/sim/8/classignition_1_1gazebo_1_1systems_1_1DetachableJoint.html)
+
+
+
 ![bg](./turtlebot3_lime/documentation/img/bg.png?raw=true)
 
 [セットアップ手順（Quick Start Guide）](./turtlebot3_lime/documentation/tb3_lime_setup.md)

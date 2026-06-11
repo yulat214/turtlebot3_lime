@@ -95,6 +95,7 @@ def generate_launch_description():
         name="rviz2",
         output="log",
         arguments=["-d", rviz_config],
+        ros_arguments=["--log-level", "WARN"],
         parameters=[
             robot_description,
             robot_description_semantic,
