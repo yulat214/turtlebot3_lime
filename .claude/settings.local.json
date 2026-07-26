@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//opt/ros/jazzy/share/gz_ros2_control/environment/**)",
+      "Read(//opt/ros/jazzy/share/gz_ros2_control/**)",
+      "Bash(grep -n \"GZ_SIM_SYSTEM\\\\|plugin_path\\\\|PLUGIN_PATH\\\\|AppendEnvironment\\\\|SetEnvironment\" /opt/ros/jazzy/share/ros_gz_sim/launch/gz_sim.launch.py)",
+      "Read(//opt/ros/jazzy/share/ros_gz_sim/launch/**)",
+      "Bash(diff /root/ros2_ws/src/turtlebot3_lime/turtlebot3_lime_description/urdf/open_manipulator_sara.urdf.xacro \\\\ *)",
+      "Read(//root/hint/turtlebot3_lime/turtlebot3_lime_description/urdf/**)",
+      "Bash(diff /root/ros2_ws/src/turtlebot3_lime/turtlebot3_lime_description/ros2_control/turtlebot3_lime_system.ros2_control.xacro \\\\ *)",
+      "Read(//root/hint/turtlebot3_lime/turtlebot3_lime_description/ros2_control/**)",
+      "Bash(ros2 pkg *)",
+      "Bash(ros2 control *)",
+      "Bash(grep -r \"GripperAction\" /opt/ros/jazzy/share/ 2>/dev/null | grep -i \"\\\\.yaml\\\\|plugin\" | head -10)",
+      "Read(//opt/ros/jazzy/share/**)",
+      "Bash(find /opt/ros/jazzy -name \"*.hpp\" -path \"*/gripper*\" | xargs grep -l \"stall\\\\|goal_tolerance\\\\|command_interface\" 2>/dev/null | head -3)",
+      "Read(//opt/ros/jazzy/**)",
+      "Bash(# Search GitHub-based source in workspace for open_manipulator *)",
+      "Read(//root/ros2_ws/src/**)",
+      "Bash(pip show *)",
+      "Read(//root/**)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:api.github.com)"
+    ]
+  }
+}
